@@ -23,7 +23,9 @@ class App extends Component {
       number,
     };
 
-    this.state.contacts.filter(contact => contact.name === name).length
+    this.state.contacts.filter(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    ).length
       ? alert(`${newContact.name} is already in contacts`)
       : this.setState(prevState => ({
           contacts: [newContact, ...prevState.contacts],
@@ -45,7 +47,7 @@ class App extends Component {
   getFiltredContacts = () => {
     const { filter, contacts } = this.state;
 
-    const normalizedFilter = filter.toLowerCase();
+    const normalizedFilter = filter.toLowerCase().trim();
 
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
